@@ -1,3 +1,3 @@
-1.运行simplefast.py
-2.运行simpletrue.py
-3.运行utility.py
+1.RUN simplefast.py
+2.RUN simpletrue.py
+3.RUN utility.py
