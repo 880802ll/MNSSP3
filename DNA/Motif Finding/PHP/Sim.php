@@ -336,7 +336,7 @@ class Sim extends Controller
         }else if ($jindu['fangfa'] === 'logo') {
             
             $filename = '/Python/n-gram/simple/data/input/' . $filename;
-            exec("python3 C:\wamp64\www\MNSS3\MNSS\logo.py {$output_filename} {$filename} 2>&1", $out, $res);
+            exec("python3 Python/logo/logo.py {$output_filename} {$filename} 2>&1", $out, $res);
         }
     }  
 
