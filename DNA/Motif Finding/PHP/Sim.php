@@ -119,40 +119,6 @@ class Sim extends Controller
         echo json_encode($res);
         return;
     }
-    public function upload()
-    {
-        $file = request()->file('file');
-        $info = $file->validate(['ext' => 'fa,fasta'])->rule('uniqid')->move('./Python/n-gram/simple/data/input/' . $uid . '/');
-        if ($info) {
-            $data = array('code' => 1, 'msg' => 'success', 'data' => array('src' => $uid . '/' . $info->getSaveName(), 'name' => $info->getSaveName()));
-            echo json_encode($data);
-            return;
-        } else {
-            // 上传失败获取错误信息
-            $data = array('code' => 0, 'msg' => 'fail', 'data' => $file->getError());
-            echo json_encode($data);
-            return;
-            // echo $file->getError();
-        }
-    }
-
-    public function fun_upload()
-    {
-        $file = request()->file('file');
-
-        $info = $file->validate(['ext' => 'zip,rar,7z'])->rule('uniqid')->move('./upload_fun/' . $uid . '/');
-        if ($info) {
-            $data = array('code' => 1, 'msg' => 'success', 'data' => array('src' => $uid . '/' . $info->getSaveName(), 'name' => $info->getSaveName()));
-            echo json_encode($data);
-            return;
-        } else {
-            // 上传失败获取错误信息
-            $data = array('code' => 0, 'msg' => 'fail', 'data' => $file->getError());
-            echo json_encode($data);
-            return;
-            // echo $file->getError();
-        }
-    }
 
     public function saveuploadfun()
     {
