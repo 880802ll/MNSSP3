@@ -38,13 +38,13 @@ class Ed extends Controller
             'filesrc' => $filesrc,
             'create_time' => time(),
         );
-        $path = 'C:\wamp64\www\EEG\data\upload\\'.$filesrc;
+        $path = '/Python/EEG/data/upload'.$filesrc;
         if(empty($post['mo'])){
-            $exec = "C:\python3.6\python.exe C:\wamp64\www\EEG\predict.py {$path} 2>&1";
+            $exec = "python3 Python/EEG/predict.py {$path} 2>&1";
         }else{
             $mo_filesrc = $user['mo_filesrc'];
             $jilu['mo_filerename']=$user['mo_filerename'];
-            $exec = "C:\python3.6\python.exe C:\wamp64\www\EEG\predict.py {$path} {$mo_filesrc} 2>&1";
+            $exec = "python3 Python/EEG/predict.py {$path} {$mo_filesrc} 2>&1";
         }
         $output = exec($exec, $out, $status);
         // echo $output
