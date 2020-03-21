@@ -81,7 +81,7 @@ class Sim extends Controller
     }
     public function sch()
     {
-        return json_encode(file_exists('./simple/data/input/'));
+        return json_encode(file_exists('./Python/n-gram/simple/data/input/'));
     }
     public function getjilu()
     {
@@ -122,7 +122,7 @@ class Sim extends Controller
     public function upload()
     {
         $file = request()->file('file');
-        $info = $file->validate(['ext' => 'fa,fasta'])->rule('uniqid')->move('./simple/data/input/' . $uid . '/');
+        $info = $file->validate(['ext' => 'fa,fasta'])->rule('uniqid')->move('./Python/n-gram/simple/data/input/' . $uid . '/');
         if ($info) {
             $data = array('code' => 1, 'msg' => 'success', 'data' => array('src' => $uid . '/' . $info->getSaveName(), 'name' => $info->getSaveName()));
             echo json_encode($data);
@@ -249,7 +249,7 @@ class Sim extends Controller
             'epsilon' => $epsilon,
             'filename' => $filename,
             'filerename' => $filerename,
-            'stysrc' => '/simple/data/input/',
+            'stysrc' => '/Python/n-gram/simple/data/input/',
             'filesrc' => $filesrc,
             // 'xulie' => $xulie,
             'state' => 0,
@@ -324,19 +324,19 @@ class Sim extends Controller
             return;
         }
         if ($jindu['fangfa'] === 'n-gram') {
-            exec("C:\python27\python.exe C:\wamp64\www\simple\simple.py {$output_filename} {$L_Left} {$epsilon} {$theta} {$filename} 2>&1", $out, $res);
+            exec("python2 Python/n-gram/simple/simple.py {$output_filename} {$L_Left} {$epsilon} {$theta} {$filename} 2>&1", $out, $res);
         } else if ($jindu['fangfa'] === 'gibbs') {
-            $output_filename = 'C:\wamp64\www\motifFinding-master-4\MNSS\result\\' . $uid . '\\' . $output_filename . '\\' . $output_filename;
-            $filename = 'C:\wamp64\www\simple\data\input\\' . $filename;
-            $path = './motifFinding-master-4/MNSS/result/' . $uid . '/' . $output_filename_gibbs . '/';
+            $output_filename = 'Python/gibbs/motifFinding-master-4/MNSS/result/' . $uid . '/' . $output_filename . '/' . $output_filename;
+            $filename = '/Python/n-gram/simple/data/input/' . $filename;
+            $path = './Python/gibbs/motifFinding-master-4/MNSS/result/' . $uid . '/' . $output_filename_gibbs . '/';
             if (!file_exists($path)) {
                 mkdir($path, 0700, true);
             }
-            exec("C:\Python27\python.exe C:\wamp64\www\motifFinding-master-4\gibbs.py {$output_filename} {$L_Left} {$filename} 2>&1", $out, $res);
+            exec("python2 Python/gibbs/motifFinding-master-4/gibbs.py {$output_filename} {$L_Left} {$filename} 2>&1", $out, $res);
         }else if ($jindu['fangfa'] === 'logo') {
             
-            $filename = 'C:\wamp64\www\simple\data\input\\' . $filename;
-            exec("C:\python3.6\python.exe C:\wamp64\www\MNSS3\MNSS\logo.py {$output_filename} {$filename} 2>&1", $out, $res);
+            $filename = '/Python/n-gram/simple/data/input/' . $filename;
+            exec("python3 C:\wamp64\www\MNSS3\MNSS\logo.py {$output_filename} {$filename} 2>&1", $out, $res);
         }
     }  
 
